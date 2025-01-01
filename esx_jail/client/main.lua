@@ -3,6 +3,16 @@ local jailTime, fastTimer = 0, 0
 ESX = nil
 ESX = exports["es_extended"]:getSharedObject()
 
+if ESX == nil then
+    print("Error: ESX object is nil. Ensure that es_extended is started before this script.")
+    return
+end
+
+if not ESX.TriggerServerCallback then
+    print("Error: ESX.TriggerServerCallback is not available. Ensure that es_extended is properly initialized.")
+    return
+end
+
 -- Function to check player's hours and jail if less than 1 hour
 function checkPlayerHoursAndJail()
     ESX.TriggerServerCallback("pekehoras:obtenerhoras", function(horas)

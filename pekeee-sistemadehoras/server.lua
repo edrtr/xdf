@@ -89,9 +89,9 @@ AddEventHandler("pekehoras:jailPlayer", function(jailTime)
             if result[1] and result[1].horas ~= nil then
                 local playerHoras = result[1].horas
 
-                if playerHoras < 1 then
-                    -- Notificación al jugador
-                    TriggerClientEvent('esx:showNotification', _source, 'Has sido encarcelado por no tener suficientes horas de juego. No puedes salir a zona caliente sin tener al menos 1 hora.')
+if playerHoras < 1 then
+    -- Notificación al jugador
+    TriggerClientEvent('esx:showNotification', _source, 'Has sido encarcelado por no tener suficientes horas de juego. No puedes salir a zona caliente sin tener al menos 1 hora.')
                     
                     TriggerClientEvent('esx_jail:jailPlayer', _source, jailTime)
                     local jailLocation = { x = 417.94, y = -991.38, z = 29.34 }
