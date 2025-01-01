@@ -98,9 +98,9 @@ Citizen.CreateThread(function()
         Citizen.Wait(1000)
 
         for playerId, data in pairs(playersInJail) do
-            playersInJail[playerId].timeRemaining = data.timeRemaining - 1
+            data.timeRemaining = data.timeRemaining - 1
 
-            if data.timeRemaining < 1 then
+            if data.timeRemaining <= 0 then
                 unjailPlayer(playerId)
             end
         end
