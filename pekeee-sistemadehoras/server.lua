@@ -102,7 +102,7 @@ ESX.RegisterServerCallback("pekehoras:obtenerhoras", function(source, cb)
     end
 end)
 
--- Event to jail player if they have less than 5 hours
+-- Event to jail player if they have less than 1 hour
 RegisterNetEvent("pekehoras:jailPlayer")
 AddEventHandler("pekehoras:jailPlayer", function(jailTime)
     local _source = source
@@ -113,9 +113,9 @@ AddEventHandler("pekehoras:jailPlayer", function(jailTime)
             if result[1] and result[1].horas ~= nil then
                 local playerHoras = result[1].horas
 
-if playerHoras < 1 then
-    -- Notificación al jugador
-    TriggerClientEvent('esx:showNotification', _source, 'Has sido encarcelado por no tener suficientes horas de juego. No puedes salir a zona caliente sin tener al menos 1 hora.')
+                if playerHoras < 1 then
+                    -- Notificación al jugador
+                    TriggerClientEvent('esx:showNotification', _source, 'Has sido encarcelado por no tener suficientes horas de juego. No puedes salir a zona caliente sin tener al menos 1 hora.')
                     
                     exports.oxmysql:execute('UPDATE users SET jail_time = ? WHERE identifier = ?', { jailTime, xPlayer.identifier }, function(affectedRows)
                         if affectedRows > 0 then
@@ -134,6 +134,10 @@ if playerHoras < 1 then
                 print('Error fetching player hours for ' .. xPlayer.getName() .. ' (ID: ' .. _source .. ')')
             end
         end)
+    else
+        print("No se pudo obtener el jugador con ID: " .. _source)
+    end
+end)
     else
         print("No se pudo obtener el jugador con ID: " .. _source)
     end

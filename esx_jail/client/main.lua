@@ -71,12 +71,12 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 
 		if jailTime > 0 and isInJail then
-			if fastTimer < 0 then
-				fastTimer = jailTime
-			end
-
-			draw2dText(_U('remaining_msg', ESX.Math.Round(fastTimer)), 0.175, 0.955)
-			fastTimer = fastTimer - 0.01
+if fastTimer <= 0 then
+    TriggerEvent('esx_jail:unjailPlayer')
+else
+    draw2dText(_U('remaining_msg', ESX.Math.Round(fastTimer)), 0.175, 0.955)
+    fastTimer = fastTimer - 0.01
+end
 			if fastTimer <= 0 then
 				TriggerEvent('esx_jail:unjailPlayer')
 			end
