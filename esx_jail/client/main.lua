@@ -3,6 +3,15 @@ local jailTime, fastTimer = 0, 0
 ESX = nil
 ESX = exports["es_extended"]:getSharedObject()
 
+-- Function to check player's hours and jail if less than 1 hour
+function checkPlayerHoursAndJail()
+    ESX.TriggerServerCallback("pekehoras:obtenerhoras", function(horas)
+        if horas and horas < 1 then
+            TriggerEvent('esx_jail:jailPlayer', 60) -- Jail for 1 minute if less than 1 hour
+        end
+    end)
+end
+
 RegisterNetEvent('esx_jail:jailPlayer')
 AddEventHandler('esx_jail:jailPlayer', function(_jailTime)
 	jailTime = _jailTime
